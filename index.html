@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="public/css/app.css">
+</head>
+<body>
+
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="">
+                    <router-link tag="li" 
+                                 :to="category.url" 
+                                 exact
+                                 v-for="category in categories"
+                                 class="nav-item"
+                                 :key="category.id"
+                    > 
+                        <a>{{category.name}}</a>
+                        <ul class="dropdown">
+                            <router-link tag="li" 
+                                         :to="{path: category.url + subCategory.url, params: subCategory}"
+                                         v-for="subCategory in category.subCategories"
+                                         exact
+                                         class="dropdown-item"
+                                         :key="subCategory.id"
+
+                            >
+                                <a>{{ subCategory.name }}</a>
+                            </router-link>
+                        </ul>
+                    </router-link>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+    </div>
+
+    <script src="public/js/app.js"></script>
+</body>
+</html>
